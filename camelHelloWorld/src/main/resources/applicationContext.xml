@@ -17,12 +17,8 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="pooledConnectionFactory"></property>
 	</bean>
+	<bean id="activeMqRouteBuilder" class="com.javacodegeeks.camel.routes.ActiveMqRouteBuilder"></bean>
 	<camelContext xmlns="http://camel.apache.org/schema/spring">
-		<endpoint id="testBeanUriHelloMethod" uri="bean:testBean?method=hello"></endpoint>
-		<route>
-			<from uri="activemq:queue:start"></from>
-			<to ref="testBeanUriHelloMethod"></to>
-			<to uri="stream:out" />
-		</route>
+		<routeBuilder ref="activeMqRouteBuilder" />
 	</camelContext>
 </beans>
